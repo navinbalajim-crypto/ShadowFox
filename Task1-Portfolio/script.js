@@ -1,15 +1,21 @@
-const text = [
+window.addEventListener("load", () => {
+    window.scrollTo(0, 0);
+});
+
+const roles = [
     "Java Developer",
-    "Front-End Developer",
     "DSA Enthusiast",
+    "Problem Solver",
     "Web Developer"
 ];
 
 let index = 0;
 
-const typing = document.getElementById("typing");
+document.addEventListener("DOMContentLoaded", () => {
+    const typing = document.getElementById("typing");
 
-setInterval(() => {
-    index = (index + 1) % text.length;
-    typing.textContent = text[index];
-}, 2000);
+    setInterval(() => {
+        index = (index + 1) % roles.length;
+        typing.textContent = roles[index];
+    }, 2000);
+});
