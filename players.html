@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players | Mumbai Indians</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="main.js"></script>
+</head>
+<body data-page="players">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Mumbai Indians home">
+        <span class="brand-mark">MI</span>
+        <span><strong>Mumbai Indians</strong><small>5× IPL Champions</small></span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="players.html" aria-current="page">Players</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="stats.html">Stats</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="fanzone.html">Fan Zone</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main class="page-shell">
+        <section class="page-hero compact">
+            <p class="eyebrow">Squad Intel</p>
+            <h1>Players</h1>
+            <p>Search MI legends, current players, former stars, and fan favorites in one polished roster wall.</p>
+        </section>
+
+        <section class="toolbar" aria-label="Player filters">
+            <label class="search-field">
+                <span>Search</span>
+                <input id="playerSearch" type="search" placeholder="Search player or skill">
+            </label>
+            <div class="filter-pills" aria-label="Role filters">
+                <button class="pill active" type="button" data-role="all">All</button>
+                <button class="pill" type="button" data-role="Batter">Batters</button>
+                <button class="pill" type="button" data-role="All-rounder">All-rounders</button>
+                <button class="pill" type="button" data-role="Wicket Keeper">Wicket Keepers</button>
+                <button class="pill" type="button" data-role="Bowler">Bowlers</button>
+            </div>
+        </section>
+
+        <section class="roster-section" id="legendsSection">
+            <div class="section-heading inline">
+                <div>
+                    <p class="eyebrow">Hall of Fame</p>
+                    <h2>MI Legends</h2>
+                </div>
+                <span class="status" id="legendsCount">0 Players</span>
+            </div>
+            <div id="legendsGrid" class="player-grid" aria-live="polite"></div>
+        </section>
+
+        <section class="roster-section" id="playersSection">
+            <div class="section-heading inline">
+                <div>
+                    <p class="eyebrow">Roster Wall</p>
+                    <h2>Players & Fan Favorites</h2>
+                </div>
+                <span class="status" id="playersCount">0 Players</span>
+            </div>
+            <div id="playersGrid" class="player-grid" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <span>Duniya hila denge hum — MI till I die. 💙🏆</span>
+        <span>#OneFamily | 5× IPL Champions | Fan Command Center</span>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fan Zone | Mumbai Indians</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="main.js"></script>
+</head>
+<body data-page="fanzone">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Mumbai Indians home">
+        <span class="brand-mark">MI</span>
+        <span><strong>Mumbai Indians</strong><small>5× IPL Champions</small></span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="players.html">Players</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="stats.html">Stats</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="fanzone.html" aria-current="page">Fan Zone</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main class="page-shell">
+        <section class="page-hero compact">
+            <p class="eyebrow">Fan Zone</p>
+            <h1>Vote for your impact player</h1>
+            <p>LocalStorage keeps the poll alive between visits on the same browser.</p>
+        </section>
+
+        <section class="poll-panel">
+            <div class="poll-actions" id="pollActions">
+                <button class="vote-card" type="button" data-player="Rohit Sharma"><strong>Rohit Sharma</strong><span>Top-order control</span></button>
+                <button class="vote-card" type="button" data-player="Jasprit Bumrah"><strong>Jasprit Bumrah</strong><span>Bowling command</span></button>
+                <button class="vote-card" type="button" data-player="Lasith Malinga"><strong>Lasith Malinga</strong><span>Death-over specialist</span></button>
+                <button class="vote-card" type="button" data-player="Suryakumar Yadav"><strong>Suryakumar Yadav</strong><span>360-degree attack</span></button>
+                <button class="vote-card" type="button" data-player="Hardik Pandya"><strong>Hardik Pandya</strong><span>All-round utility</span></button>
+                <button class="vote-card" type="button" data-player="Kieron Pollard"><strong>Kieron Pollard</strong><span>Powerplay master</span></button>
+            </div>
+
+            <div class="results-card">
+                <div class="section-heading inline">
+                    <div>
+                        <p class="eyebrow">Live Poll</p>
+                        <h2>Fan Votes</h2>
+                    </div>
+                    <button class="text-button" type="button" id="resetPoll">Reset</button>
+                </div>
+                <div id="pollResults" class="poll-results" aria-live="polite"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <span>Duniya hila denge hum — MI till I die. 💙🏆</span>
+        <span>#OneFamily | 5× IPL Champions | Fan Command Center</span>
+    </footer>
+</body>
+</html>

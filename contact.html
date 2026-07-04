@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Mumbai Indians</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="main.js"></script>
+</head>
+<body data-page="contact">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Mumbai Indians home">
+        <span class="brand-mark">MI</span>
+        <span><strong>Mumbai Indians</strong><small>5× IPL Champions</small></span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="players.html">Players</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="stats.html">Stats</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="fanzone.html">Fan Zone</a>
+            <a href="contact.html" aria-current="page">Contact</a>
+        </nav>
+    </header>
+
+    <main class="page-shell contact-layout">
+        <section class="page-hero compact">
+            <p class="eyebrow">Contact Desk</p>
+            <h1>Send a fan message</h1>
+            <p>A professional form flow with validation, clear fields, and a polished confirmation state.</p>
+        </section>
+
+        <form class="contact-form" id="contactForm">
+            <label>
+                <span>Name</span>
+                <input name="name" type="text" placeholder="Your name" required>
+            </label>
+            <label>
+                <span>Email</span>
+                <input name="email" type="email" placeholder="you@example.com" required>
+            </label>
+            <label>
+                <span>Message</span>
+                <textarea name="message" placeholder="Write your message" rows="6" required></textarea>
+            </label>
+            <button class="button primary" type="submit">Send Message</button>
+            <p class="form-note" id="formNote" aria-live="polite"></p>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <span>Duniya hila denge hum — MI till I die. 💙🏆</span>
+        <span>#OneFamily | 5× IPL Champions | Fan Command Center</span>
+    </footer>
+</body>
+</html>
