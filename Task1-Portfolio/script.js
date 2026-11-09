@@ -1,25 +1,79 @@
 /**
- * NAVINBALAJI M | PORTFOLIO SCRIPT
- * Three.js 3D WebGL Graphics, ATS Resume Modal, 3D Card Tilt, Typewriter & Micro-Interactions
+ * NAVINBALAJI M | ULTRA-PREMIUM MNC DESIGNER PORTFOLIO
+ * Three.js Iridescent Chromatic Torus Knot, Dynamic RGB Lights, Spotlight Cards,
+ * Magnetic Button Physics, Animated Counters & ATS Resume Subsystem
  */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     /* ==========================================================================
-       1. THREE.JS 3D PROCEDURAL WEBGL GRAPHICS
+       1. CUSTOM GLOWING AURORA CURSOR TRACKER
        ========================================================================== */
-    const initThreeScene = () => {
+    const cursorDot = document.getElementById("cursorDot");
+    const cursorGlow = document.getElementById("cursorGlow");
+
+    let mouseClientX = window.innerWidth / 2;
+    let mouseClientY = window.innerHeight / 2;
+    let dotX = mouseClientX;
+    let dotY = mouseClientY;
+    let glowX = mouseClientX;
+    let glowY = mouseClientY;
+
+    if (cursorDot && cursorGlow) {
+        window.addEventListener("mousemove", (e) => {
+            mouseClientX = e.clientX;
+            mouseClientY = e.clientY;
+        }, { passive: true });
+
+        const updateCursor = () => {
+            // Dot follows sharply
+            dotX += (mouseClientX - dotX) * 0.5;
+            dotY += (mouseClientY - dotY) * 0.5;
+            cursorDot.style.left = `${dotX}px`;
+            cursorDot.style.top = `${dotY}px`;
+
+            // Glow follows with fluid lag
+            glowX += (mouseClientX - glowX) * 0.12;
+            glowY += (mouseClientY - glowY) * 0.12;
+            cursorGlow.style.left = `${glowX}px`;
+            cursorGlow.style.top = `${glowY}px`;
+
+            requestAnimationFrame(updateCursor);
+        };
+        updateCursor();
+
+        // Cursor scaling on interactive elements
+        const interactiveTargets = document.querySelectorAll("a, button, .spotlight-card, .skill-tile, .stat-pill");
+        interactiveTargets.forEach(el => {
+            el.addEventListener("mouseenter", () => {
+                cursorDot.style.width = "14px";
+                cursorDot.style.height = "14px";
+                cursorGlow.style.transform = "translate(-50%, -50%) scale(1.3)";
+            });
+            el.addEventListener("mouseleave", () => {
+                cursorDot.style.width = "6px";
+                cursorDot.style.height = "6px";
+                cursorGlow.style.transform = "translate(-50%, -50%) scale(1)";
+            });
+        });
+    }
+
+
+    /* ==========================================================================
+       2. THREE.JS IRIDESCENT CHROMATIC 3D WEBGL SCENE
+       ========================================================================== */
+    const initThreeMasterpiece = () => {
         const canvas = document.getElementById("three-canvas");
         if (!canvas || typeof THREE === "undefined") {
-            console.log("Three.js not loaded or canvas missing; skipping 3D background.");
+            console.log("Three.js not loaded or canvas missing; graceful fallback to CSS auroras.");
             return;
         }
 
         try {
-            // Scene, Camera, Renderer
+            // 1. Scene, Camera, Renderer
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 35;
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 32;
 
             const renderer = new THREE.WebGLRenderer({
                 canvas: canvas,
@@ -30,114 +84,143 @@ document.addEventListener("DOMContentLoaded", () => {
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            // Ambient Lights
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            // 2. Ambient & Multi-Point Dynamic Chromatic Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
             scene.add(ambientLight);
 
-            const pointLight1 = new THREE.PointLight(0x38bdf8, 2.5, 80);
-            pointLight1.position.set(20, 20, 20);
-            scene.add(pointLight1);
+            // Orbiting Point Lights (Cyan, Magenta, Violet, Amber)
+            const lightCyan = new THREE.PointLight(0x00f5ff, 3.5, 75);
+            scene.add(lightCyan);
 
-            const pointLight2 = new THREE.PointLight(0x818cf8, 2, 80);
-            pointLight2.position.set(-20, -20, 10);
-            scene.add(pointLight2);
+            const lightMagenta = new THREE.PointLight(0xff007f, 3.5, 75);
+            scene.add(lightMagenta);
 
-            // 1) 3D Particle Constellation
-            const particleCount = 750;
-            const particleGeometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(particleCount * 3);
-            const scales = new Float32Array(particleCount);
+            const lightViolet = new THREE.PointLight(0x8a2be2, 3.0, 75);
+            scene.add(lightViolet);
 
-            for (let i = 0; i < particleCount * 3; i += 3) {
-                positions[i] = (Math.random() - 0.5) * 120;
-                positions[i + 1] = (Math.random() - 0.5) * 120;
-                positions[i + 2] = (Math.random() - 0.5) * 80;
-                scales[i / 3] = Math.random() * 1.5 + 0.5;
+            const lightAmber = new THREE.PointLight(0xffaa00, 2.5, 65);
+            scene.add(lightAmber);
+
+            // 3. Central Masterpiece: Iridescent Fluid Torus Knot
+            const knotGroup = new THREE.Group();
+            knotGroup.position.set(0, 0, 4);
+
+            const knotGeo = new THREE.TorusKnotGeometry(6.5, 1.85, 160, 32, 2, 3);
+            const knotMat = new THREE.MeshPhysicalMaterial({
+                color: 0x16182e,
+                metalness: 0.9,
+                roughness: 0.12,
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.08,
+                reflectivity: 0.95
+            });
+            const torusKnot = new THREE.Mesh(knotGeo, knotMat);
+            knotGroup.add(torusKnot);
+
+            // Outer Holographic Wireframe Cage
+            const cageGeo = new THREE.IcosahedronGeometry(13, 1);
+            const cageMat = new THREE.MeshBasicMaterial({
+                color: 0x00f5ff,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.15
+            });
+            const cage = new THREE.Mesh(cageGeo, cageMat);
+            knotGroup.add(cage);
+
+            // Orbiting Crystal Satellites
+            const satellites = [];
+            const satColors = [0x00f5ff, 0xff007f, 0x8a2be2, 0x00f5a0];
+            const satRadii = [10.5, 12, 11, 13.5];
+
+            for (let i = 0; i < 4; i++) {
+                const satGeo = new THREE.OctahedronGeometry(0.85);
+                const satMat = new THREE.MeshStandardMaterial({
+                    color: satColors[i],
+                    emissive: satColors[i],
+                    emissiveIntensity: 0.6,
+                    metalness: 0.8,
+                    roughness: 0.2
+                });
+                const satMesh = new THREE.Mesh(satGeo, satMat);
+                satellites.push({
+                    mesh: satMesh,
+                    radius: satRadii[i],
+                    speed: 0.6 + i * 0.2,
+                    offset: (i * Math.PI) / 2
+                });
+                knotGroup.add(satMesh);
             }
 
-            particleGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-            particleGeometry.setAttribute("scale", new THREE.BufferAttribute(scales, 1));
+            scene.add(knotGroup);
 
-            // Create Canvas Particle Texture
-            const createParticleTexture = () => {
-                const canvas = document.createElement("canvas");
-                canvas.width = 32;
-                canvas.height = 32;
-                const ctx = canvas.getContext("2d");
-                const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
-                gradient.addColorStop(0, "rgba(56, 189, 248, 1)");
-                gradient.addColorStop(0.3, "rgba(99, 102, 241, 0.7)");
-                gradient.addColorStop(0.8, "rgba(168, 85, 247, 0.2)");
-                gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-                ctx.fillStyle = gradient;
+            // 4. Multi-Layered Chromatic Particle Field
+            const particleCount = 1000;
+            const particleGeo = new THREE.BufferGeometry();
+            const pPositions = new Float32Array(particleCount * 3);
+            const pColors = new Float32Array(particleCount * 3);
+
+            const palette = [
+                new THREE.Color(0x00f5ff), // Cyan
+                new THREE.Color(0xff007f), // Magenta
+                new THREE.Color(0x8a2be2), // Violet
+                new THREE.Color(0x00f5a0), // Emerald
+                new THREE.Color(0xffaa00)  // Amber
+            ];
+
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                pPositions[i3] = (Math.random() - 0.5) * 140;
+                pPositions[i3 + 1] = (Math.random() - 0.5) * 140;
+                pPositions[i3 + 2] = (Math.random() - 0.5) * 80;
+
+                const c = palette[Math.floor(Math.random() * palette.length)];
+                pColors[i3] = c.r;
+                pColors[i3 + 1] = c.g;
+                pColors[i3 + 2] = c.b;
+            }
+
+            particleGeo.setAttribute("position", new THREE.BufferAttribute(pPositions, 3));
+            particleGeo.setAttribute("color", new THREE.BufferAttribute(pColors, 3));
+
+            // Circular Glow Texture Generator
+            const createGlowTexture = () => {
+                const pCanvas = document.createElement("canvas");
+                pCanvas.width = 32;
+                pCanvas.height = 32;
+                const ctx = pCanvas.getContext("2d");
+                const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+                grad.addColorStop(0, "rgba(255, 255, 255, 1)");
+                grad.addColorStop(0.3, "rgba(255, 255, 255, 0.8)");
+                grad.addColorStop(0.7, "rgba(255, 255, 255, 0.2)");
+                grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+                ctx.fillStyle = grad;
                 ctx.fillRect(0, 0, 32, 32);
-                return new THREE.CanvasTexture(canvas);
+                return new THREE.CanvasTexture(pCanvas);
             };
 
-            const particleMaterial = new THREE.PointsMaterial({
-                size: 1.4,
-                map: createParticleTexture(),
+            const particleMat = new THREE.PointsMaterial({
+                size: 1.5,
+                map: createGlowTexture(),
+                vertexColors: true,
                 transparent: true,
-                opacity: 0.8,
+                opacity: 0.85,
                 blending: THREE.AdditiveBlending,
                 depthWrite: false
             });
 
-            const particles = new THREE.Points(particleGeometry, particleMaterial);
+            const particles = new THREE.Points(particleGeo, particleMat);
             scene.add(particles);
 
-            // 2) Hero 3D Geometric Floating Core
-            const coreGroup = new THREE.Group();
-            coreGroup.position.set(0, 0, 5);
+            // 5. Mouse Interaction with Inertia
+            let mouseNormX = 0;
+            let mouseNormY = 0;
+            let targetNormX = 0;
+            let targetNormY = 0;
 
-            // Wireframe Icosahedron
-            const icoGeo = new THREE.IcosahedronGeometry(7.5, 1);
-            const icoMat = new THREE.MeshStandardMaterial({
-                color: 0x38bdf8,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.25,
-                emissive: 0x0284c7,
-                emissiveIntensity: 0.3
-            });
-            const icosahedron = new THREE.Mesh(icoGeo, icoMat);
-            coreGroup.add(icosahedron);
-
-            // Inner Glowing Sphere
-            const innerGeo = new THREE.SphereGeometry(3.5, 24, 24);
-            const innerMat = new THREE.MeshBasicMaterial({
-                color: 0x818cf8,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.2
-            });
-            const innerSphere = new THREE.Mesh(innerGeo, innerMat);
-            coreGroup.add(innerSphere);
-
-            // Orbital Ring
-            const ringGeo = new THREE.TorusGeometry(11, 0.08, 16, 100);
-            const ringMat = new THREE.MeshBasicMaterial({
-                color: 0x38bdf8,
-                transparent: true,
-                opacity: 0.35
-            });
-            const ring = new THREE.Mesh(ringGeo, ringMat);
-            ring.rotation.x = Math.PI / 3;
-            coreGroup.add(ring);
-
-            scene.add(coreGroup);
-
-            // Mouse Tracking with Inertia
-            let mouseX = 0;
-            let mouseY = 0;
-            let targetX = 0;
-            let targetY = 0;
-            const windowHalfX = window.innerWidth / 2;
-            const windowHalfY = window.innerHeight / 2;
-
-            document.addEventListener("mousemove", (event) => {
-                mouseX = (event.clientX - windowHalfX) * 0.001;
-                mouseY = (event.clientY - windowHalfY) * 0.001;
+            window.addEventListener("mousemove", (e) => {
+                mouseNormX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseNormY = -(e.clientY / window.innerHeight) * 2 + 1;
             }, { passive: true });
 
             // Handle Resize
@@ -148,50 +231,122 @@ document.addEventListener("DOMContentLoaded", () => {
             };
             window.addEventListener("resize", onResize);
 
-            // Animation Loop
-            let clock = new THREE.Clock();
-            const animate = () => {
-                requestAnimationFrame(animate);
-                const elapsedTime = clock.getElapsedTime();
+            // 6. Animation Loop
+            const clock = new THREE.Clock();
+
+            const renderFrame = () => {
+                requestAnimationFrame(renderFrame);
+                const t = clock.getElapsedTime();
 
                 // Smooth mouse interpolation
-                targetX += (mouseX - targetX) * 0.05;
-                targetY += (mouseY - targetY) * 0.05;
+                targetNormX += (mouseNormX - targetNormX) * 0.04;
+                targetNormY += (mouseNormY - targetNormY) * 0.04;
 
-                // Subtle camera drift based on cursor
-                camera.position.x += (targetX * 25 - camera.position.x) * 0.05;
-                camera.position.y += (-targetY * 25 - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
+                // Orbit lights around the central knot in 3D
+                lightCyan.position.set(
+                    Math.cos(t * 0.9) * 16,
+                    Math.sin(t * 0.8) * 14,
+                    Math.sin(t * 0.7) * 12 + 6
+                );
+                lightMagenta.position.set(
+                    Math.cos(t * 0.7 + 2) * 16,
+                    Math.sin(t * 0.9 + 1) * 14,
+                    Math.cos(t * 0.6) * 12 + 6
+                );
+                lightViolet.position.set(
+                    Math.sin(t * 0.6 + 4) * 18,
+                    Math.cos(t * 0.8 + 2) * 15,
+                    Math.sin(t * 0.9) * 10 + 4
+                );
+                lightAmber.position.set(
+                    Math.cos(t * 0.8 + 5) * 14,
+                    Math.sin(t * 0.6 + 3) * 16,
+                    Math.cos(t * 0.8) * 12 + 4
+                );
 
-                // Rotate particles slowly
-                particles.rotation.y = elapsedTime * 0.03;
-                particles.rotation.x = elapsedTime * 0.015;
+                // Rotate knot smoothly with mouse tilt
+                torusKnot.rotation.x = t * 0.22 + targetNormY * 0.5;
+                torusKnot.rotation.y = t * 0.28 + targetNormX * 0.5;
 
-                // Rotate floating 3D geometric core
-                icosahedron.rotation.x = elapsedTime * 0.18;
-                icosahedron.rotation.y = elapsedTime * 0.22;
-                innerSphere.rotation.x = -elapsedTime * 0.25;
-                innerSphere.rotation.y = -elapsedTime * 0.3;
-                ring.rotation.z = elapsedTime * 0.12;
+                cage.rotation.x = -t * 0.12;
+                cage.rotation.y = t * 0.15;
 
-                // Float core up and down gently
-                coreGroup.position.y = Math.sin(elapsedTime * 0.8) * 1.5;
+                // Orbit Satellites
+                satellites.forEach((sat) => {
+                    const angle = t * sat.speed + sat.offset;
+                    sat.mesh.position.set(
+                        Math.cos(angle) * sat.radius,
+                        Math.sin(angle * 1.2) * (sat.radius * 0.6),
+                        Math.sin(angle) * sat.radius
+                    );
+                    sat.mesh.rotation.x = t * 1.5;
+                    sat.mesh.rotation.y = t * 2.0;
+                });
+
+                // Gentle vertical floating of knot group
+                knotGroup.position.y = Math.sin(t * 0.7) * 1.2;
+
+                // Slow rotation of particles
+                particles.rotation.y = t * 0.025;
+                particles.rotation.x = t * 0.015;
+
+                // Camera drift based on cursor
+                camera.position.x += (targetNormX * 12 - camera.position.x) * 0.03;
+                camera.position.y += (targetNormY * 8 - camera.position.y) * 0.03;
+                camera.lookAt(0, 0, 0);
 
                 renderer.render(scene, camera);
             };
 
-            animate();
+            renderFrame();
 
-        } catch (e) {
-            console.warn("WebGL initialization note:", e);
+        } catch (err) {
+            console.warn("WebGL visual note:", err);
         }
     };
 
-    initThreeScene();
+    initThreeMasterpiece();
 
 
     /* ==========================================================================
-       2. DYNAMIC TYPEWRITER EFFECT
+       3. INTERACTIVE SPOTLIGHT CARD TRACKER
+       ========================================================================== */
+    const spotlightCards = document.querySelectorAll(".spotlight-card");
+
+    spotlightCards.forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            card.style.setProperty("--mouse-x", `${x}px`);
+            card.style.setProperty("--mouse-y", `${y}px`);
+        });
+    });
+
+
+    /* ==========================================================================
+       4. MAGNETIC BUTTON PHYSICS
+       ========================================================================== */
+    const magneticBtns = document.querySelectorAll(".magnetic-btn");
+
+    magneticBtns.forEach((btn) => {
+        btn.addEventListener("mousemove", (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            btn.style.transform = `translate(${x * 0.24}px, ${y * 0.24}px)`;
+        });
+
+        btn.addEventListener("mouseleave", () => {
+            btn.style.transform = "translate(0px, 0px)";
+        });
+    });
+
+
+    /* ==========================================================================
+       5. DYNAMIC TYPEWRITER CAROUSEL
        ========================================================================== */
     const roles = [
         "Java Developer",
@@ -202,69 +357,91 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     const typingElement = document.getElementById("typing");
-    let roleIndex = 0;
-    let charIndex = 0;
+    let roleIdx = 0;
+    let charIdx = 0;
     let isDeleting = false;
-    let typingSpeed = 100;
+    let typeSpeed = 100;
 
-    const typeRoles = () => {
+    const runTypewriter = () => {
         if (!typingElement) return;
 
-        const currentRole = roles[roleIndex];
+        const currentRole = roles[roleIdx];
 
         if (isDeleting) {
-            typingElement.textContent = currentRole.substring(0, charIndex - 1);
-            charIndex--;
-            typingSpeed = 50;
+            typingElement.textContent = currentRole.substring(0, charIdx - 1);
+            charIdx--;
+            typeSpeed = 45;
         } else {
-            typingElement.textContent = currentRole.substring(0, charIndex + 1);
-            charIndex++;
-            typingSpeed = 110;
+            typingElement.textContent = currentRole.substring(0, charIdx + 1);
+            charIdx++;
+            typeSpeed = 100;
         }
 
-        if (!isDeleting && charIndex === currentRole.length) {
+        if (!isDeleting && charIdx === currentRole.length) {
             isDeleting = true;
-            typingSpeed = 1800; // Pause at full word
-        } else if (isDeleting && charIndex === 0) {
+            typeSpeed = 2000; // Pause at completed word
+        } else if (isDeleting && charIdx === 0) {
             isDeleting = false;
-            roleIndex = (roleIndex + 1) % roles.length;
-            typingSpeed = 400; // Pause before next word
+            roleIdx = (roleIdx + 1) % roles.length;
+            typeSpeed = 350; // Pause before next word
         }
 
-        setTimeout(typeRoles, typingSpeed);
+        setTimeout(runTypewriter, typeSpeed);
     };
 
-    typeRoles();
+    runTypewriter();
 
 
     /* ==========================================================================
-       3. 3D CARD TILT EFFECT (Vanilla Physics)
+       6. ANIMATED COUNTER STATISTICS (Intersection Observer)
        ========================================================================== */
-    const tiltCards = document.querySelectorAll(".tilt-card");
+    const counters = document.querySelectorAll(".counter");
+    let countersAnimated = false;
 
-    tiltCards.forEach((card) => {
-        card.addEventListener("mousemove", (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+    const animateCounters = () => {
+        counters.forEach((counter) => {
+            const target = parseFloat(counter.getAttribute("data-target"));
+            const decimals = parseInt(counter.getAttribute("data-decimals") || "0", 10);
+            const duration = 1800; // ms
+            const startTime = performance.now();
 
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
+            const updateCount = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease out expo
+                const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                const currentVal = easeProgress * target;
 
-            const rotateX = ((y - centerY) / centerY) * -6; // Max 6 deg
-            const rotateY = ((x - centerX) / centerX) * 6;
+                counter.textContent = currentVal.toFixed(decimals);
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+                if (progress < 1) {
+                    requestAnimationFrame(updateCount);
+                } else {
+                    counter.textContent = target.toFixed(decimals);
+                }
+            };
+
+            requestAnimationFrame(updateCount);
         });
+    };
 
-        card.addEventListener("mouseleave", () => {
-            card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
-        });
-    });
+    const metricsStrip = document.querySelector(".metrics-lux-strip");
+    if (metricsStrip) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countersAnimated) {
+                    countersAnimated = true;
+                    animateCounters();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        observer.observe(metricsStrip);
+    }
 
 
     /* ==========================================================================
-       4. INTERACTIVE RESUME MODAL & PRINTING
+       7. INTERACTIVE ATS RESUME MODAL & PRINTING
        ========================================================================== */
     const resumeModal = document.getElementById("resumeModal");
     const openResumeModalBtn = document.getElementById("openResumeModalBtn");
@@ -282,7 +459,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Clone resume sheet into modal body if empty
         if (!modalResumeContent.hasChildNodes() || modalResumeContent.children.length === 0) {
             const clone = printableResumeArea.cloneNode(true);
-            clone.id = "modalPrintableArea";
+            clone.id = "modalClonedResume";
             modalResumeContent.appendChild(clone);
         }
 
@@ -321,80 +498,81 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Print / Save as PDF handlers
-    const handlePrint = () => {
+    // Native Print triggers
+    const triggerPrint = () => {
         window.print();
     };
 
-    if (printResumeBtn) printResumeBtn.addEventListener("click", handlePrint);
-    if (modalPrintBtn) modalPrintBtn.addEventListener("click", handlePrint);
+    if (printResumeBtn) printResumeBtn.addEventListener("click", triggerPrint);
+    if (modalPrintBtn) modalPrintBtn.addEventListener("click", triggerPrint);
 
 
     /* ==========================================================================
-       5. CLIPBOARD COPY & TOAST NOTIFICATION
+       8. TOAST NOTIFICATIONS & CLIPBOARD TRIGGERS
        ========================================================================== */
     const toast = document.getElementById("toastNotification");
     const toastMessage = document.getElementById("toastMessage");
-    let toastTimeout;
+    let toastTimer;
 
     const showToast = (message) => {
         if (!toast || !toastMessage) return;
         toastMessage.textContent = message;
         toast.classList.add("show");
 
-        clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => {
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
             toast.classList.remove("show");
-        }, 3200);
+        }, 3400);
     };
 
-    // Copy Email
+    // Copy Email Action
     const copyEmailBtn = document.getElementById("copyEmailBtn");
     if (copyEmailBtn) {
         copyEmailBtn.addEventListener("click", () => {
             const email = "navinbalaji.m@gmail.com";
             navigator.clipboard.writeText(email).then(() => {
-                showToast("Email copied to clipboard: " + email);
+                showToast("Email copied: " + email);
             }).catch(() => {
                 showToast("Email: " + email);
             });
         });
     }
 
-    // Copy Summary
+    // Copy Summary Action
     const copySummaryBtn = document.getElementById("copySummaryBtn");
     if (copySummaryBtn) {
         copySummaryBtn.addEventListener("click", () => {
-            const summaryText = "Information Technology undergraduate with a foundation in Java, object-oriented programming, data structures, and algorithms. Project experience includes building a real-time communication alignment platform and an employability outcomes measurement system with skill-gap detection and placement forecasting. Interested in software engineering, backend development, and practical problem-solving.";
+            const summaryText = "Information Technology undergraduate with a solid foundation in Java, object-oriented programming, data structures, and algorithms. Project experience includes building a real-time communication alignment platform and an employability outcomes measurement system with skill-gap detection and placement forecasting. Interested in software engineering, backend development, and practical problem-solving.";
             navigator.clipboard.writeText(summaryText).then(() => {
                 showToast("Resume summary copied to clipboard!");
             }).catch(() => {
-                showToast("Could not copy summary.");
+                showToast("Summary copied.");
             });
         });
     }
 
 
     /* ==========================================================================
-       6. SKILL FILTERING TABS
+       9. SKILLS DISCIPLINE FILTER TABS
        ========================================================================== */
-    const filterBtns = document.querySelectorAll(".filter-btn");
-    const skillCategories = document.querySelectorAll(".skill-category");
+    const skillTabs = document.querySelectorAll(".skill-tab");
+    const skillGroups = document.querySelectorAll(".skill-group");
 
-    filterBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            filterBtns.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
+    skillTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            skillTabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
 
-            const filter = btn.getAttribute("data-filter");
+            const filter = tab.getAttribute("data-filter");
 
-            skillCategories.forEach((cat) => {
-                const categoryType = cat.getAttribute("data-category");
-                if (filter === "all" || categoryType === filter) {
-                    cat.style.display = "block";
-                    cat.style.animation = "fadeIn 0.4s ease";
+            skillGroups.forEach((group) => {
+                const groupType = group.getAttribute("data-category");
+                if (filter === "all" || groupType === filter) {
+                    group.style.display = "block";
+                    group.style.opacity = "1";
+                    group.style.transform = "translateY(0)";
                 } else {
-                    cat.style.display = "none";
+                    group.style.display = "none";
                 }
             });
         });
@@ -402,24 +580,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==========================================================================
-       7. NAVBAR SCROLL, ACTIVE SECTIONS & MOBILE DRAWER
+       10. NAVBAR SCROLL, ACTIVE SECTION SPY & MOBILE DRAWER
        ========================================================================== */
     const navbar = document.getElementById("navbar");
     const mobileToggle = document.getElementById("mobileToggle");
     const navLinks = document.getElementById("navLinks");
-    const allNavAnchors = document.querySelectorAll(".nav-link");
+    const navAnchors = document.querySelectorAll(".nav-link");
     const backToTopBtn = document.getElementById("backToTopBtn");
     const sections = document.querySelectorAll("section[id]");
 
-    // Mobile Drawer
+    // Mobile Drawer Toggle
     if (mobileToggle && navLinks) {
         mobileToggle.addEventListener("click", () => {
             mobileToggle.classList.toggle("active");
             navLinks.classList.toggle("open");
         });
 
-        // Close when clicking any nav item
-        allNavAnchors.forEach(link => {
+        navAnchors.forEach(link => {
             link.addEventListener("click", () => {
                 mobileToggle.classList.remove("active");
                 navLinks.classList.remove("open");
@@ -427,20 +604,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Window Scroll Events
+    // Scroll Events
     window.addEventListener("scroll", () => {
         const scrollY = window.pageYOffset;
 
         // Navbar blur on scroll
         if (navbar) {
-            if (scrollY > 60) {
+            if (scrollY > 50) {
                 navbar.classList.add("scrolled");
             } else {
                 navbar.classList.remove("scrolled");
             }
         }
 
-        // Back to Top Visibility
+        // Back to Top button visibility
         if (backToTopBtn) {
             if (scrollY > 400) {
                 backToTopBtn.classList.add("visible");
@@ -449,17 +626,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Active Section Indicator
+        // Active Section Spy
         let currentSectionId = "";
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - 140;
+            const sectionTop = section.offsetTop - 150;
             const sectionHeight = section.offsetHeight;
             if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
                 currentSectionId = section.getAttribute("id");
             }
         });
 
-        allNavAnchors.forEach(link => {
+        navAnchors.forEach(link => {
             link.classList.remove("active");
             if (link.getAttribute("href") === `#${currentSectionId}`) {
                 link.classList.add("active");
@@ -479,7 +656,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==========================================================================
-       8. INTERACTIVE CONTACT FORM HANDLER
+       11. INTERACTIVE MESSAGE TRANSMIT FORM
        ========================================================================== */
     const contactForm = document.getElementById("contactForm");
     const formSubmitBtn = document.getElementById("formSubmitBtn");
@@ -489,21 +666,21 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
 
             const name = document.getElementById("senderName").value;
-            const originalText = formSubmitBtn.innerHTML;
+            const originalHTML = formSubmitBtn.innerHTML;
 
-            formSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            formSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Transmitting...</span>';
             formSubmitBtn.disabled = true;
 
             setTimeout(() => {
-                formSubmitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Message Sent!';
-                showToast(`Thank you, ${name}! Your message has been sent to Navinbalaji.`);
+                formSubmitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> <span>Message Transmitted!</span>';
+                showToast(`Thank you, ${name}! Your inquiry has been sent to Navinbalaji.`);
                 contactForm.reset();
 
                 setTimeout(() => {
-                    formSubmitBtn.innerHTML = originalText;
+                    formSubmitBtn.innerHTML = originalHTML;
                     formSubmitBtn.disabled = false;
-                }, 3000);
-            }, 1000);
+                }, 3200);
+            }, 1200);
         });
     }
 
