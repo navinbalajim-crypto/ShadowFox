@@ -2,21 +2,21 @@
 
 A clean, modern, and production-grade developer portfolio engineered to top software industry standards. Built using **semantic HTML5**, modern **CSS3 custom properties**, vanilla **JavaScript (ES6+)**, and a procedural **Three.js WebGL scene**.
 
-Designed without AI-generated sticker decorations or artificial badges — featuring **real-world software UI interface mockups**, clean typographic hierarchy, interactive project deep-dives, and an **embedded ATS-grade Resume workstation** with native print-to-PDF support.
+Designed without AI-generated sticker decorations or unwanted placeholder graphics — featuring a clean typographic hierarchy, deep-dive technical project breakdowns, and an **embedded ATS-grade Resume workstation** with native print-to-PDF support.
 
 ---
 
 ## 🌟 Visual & Architecture Highlights
 
-### 1. Real-World Software UI Previews
-- **Alignment Radar UI**: Full software interface preview showcasing live chat telemetry, in-line semantic ambiguity alerts powered by **NVIDIA Nemotron**, and WebSocket connection state tracking.
-- **Longitudinal Skilling Dashboard**: Analytics dashboard visualization measuring longitudinal competency growth, skill gap deficit tracking, and role-based access control (RBAC).
-- **WebGL Engine Inspector**: Three.js scene graph hierarchy, shader parameter inspection, and frame latency monitoring.
+### 1. In-Depth Project Breakdowns
+- **Alignment Radar**: Real-Time Communication Alignment Platform analyzing text conversations for ambiguity using **NVIDIA Nemotron**, with **Socket.IO** real-time messaging, **FastAPI**, and **PostgreSQL**.
+- **Longitudinal Skilling System**: AI-driven platform measuring longitudinal learner outcomes, identifying employability gaps, with **FastAPI**, **PostgreSQL**, **JWT Auth**, and **React**.
+- **Interactive 3D Portfolio**: 60 FPS procedural WebGL scene with physical material clearcoat, orbiting point lights, and ATS resume engine.
 
-### 2. Clean Professional Presentation (Zero Artificial Stickers)
-- Clean, executive avatar frame supporting a real portrait photo (`assets/profile.jpg`) with a refined monogram fallback.
+### 2. Clean Professional Presentation (Zero Artificial Stickers / Unwanted Images)
+- Clean monogram avatar frame (`NB`) with refined typographic hierarchy.
 - Standardized, high-contrast technical skill cards organized by engineering discipline.
-- Clean typographic list markers (`—` and `•`) replacing decorative star/sparkle glyphs.
+- Clean typographic list markers replacing decorative glyphs.
 - Interactive card spotlight sheen tracking cursor coordinates (`--mouse-x`, `--mouse-y`).
 
 ### 3. Procedural 3D WebGL Graphics (`Three.js r128`)
