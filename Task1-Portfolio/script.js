@@ -425,7 +425,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    const metricsStrip = document.querySelector(".metrics-lux-strip");
+    const metricsStrip = document.querySelector(".metrics-strip, .metrics-lux-strip");
     if (metricsStrip) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -556,7 +556,7 @@ document.addEventListener("DOMContentLoaded", () => {
        9. SKILLS DISCIPLINE FILTER TABS
        ========================================================================== */
     const skillTabs = document.querySelectorAll(".skill-tab");
-    const skillGroups = document.querySelectorAll(".skill-group");
+    const skillGroups = document.querySelectorAll(".skill-category-card, .skill-group");
 
     skillTabs.forEach((tab) => {
         tab.addEventListener("click", () => {

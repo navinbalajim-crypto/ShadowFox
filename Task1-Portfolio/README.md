@@ -1,52 +1,41 @@
-# 🌌 Navinbalaji M — Ultra-Premium Creative Technologist Portfolio
+# 🚀 Navinbalaji M — Software Engineer Portfolio
 
-A cutting-edge, high-aesthetic developer and UI/UX portfolio engineered to the standards of top global tech firms (Apple, Stripe, Linear, Framer, Lusion). Featuring an **iridescent procedural Three.js 3D WebGL scene**, dynamic multi-point RGB lighting, deep obsidian canvas, interactive spotlight card reflections, magnetic button physics, and an **embedded ATS-grade Resume workstation** with native print-to-PDF support.
+A clean, modern, and production-grade developer portfolio engineered to top software industry standards. Built using **semantic HTML5**, modern **CSS3 custom properties**, vanilla **JavaScript (ES6+)**, and a procedural **Three.js WebGL scene**.
+
+Designed without AI-generated sticker decorations or artificial badges — featuring **real-world software UI interface mockups**, clean typographic hierarchy, interactive project deep-dives, and an **embedded ATS-grade Resume workstation** with native print-to-PDF support.
 
 ---
 
-## 🌟 Visual Architecture & Craftsmanship
+## 🌟 Visual & Architecture Highlights
 
-### 1. 3D Procedural WebGL Masterpiece (`Three.js r128`)
-- **Iridescent Liquid Torus Knot**:
-  - Engineered with `THREE.MeshPhysicalMaterial` featuring high metalness, low roughness, and glass-like clearcoat.
-  - Multi-point orbiting chromatic lights (Hyper-Cyan `#00f5ff`, Hot Magenta `#ff007f`, Electric Violet `#8a2be2`, and Sunset Amber `#ffaa00`) creating dynamic specular reflections.
-  - Outer holographic icosahedron cage and orbiting crystal satellites.
-- **Dynamic Chromatic Particle Nebula**:
-  - Over 1,000 multi-colored luminous particles with vertex color interpolation (Cyan, Magenta, Violet, Emerald, Gold).
-  - Wave physics and pointer-proximity inertia.
-- **60 FPS Smooth Rendering**:
-  - Automatic device-pixel ratio clamping, resize synchronization, and low-power graceful degradation.
+### 1. Real-World Software UI Previews
+- **Alignment Radar UI**: Full software interface preview showcasing live chat telemetry, in-line semantic ambiguity alerts powered by **NVIDIA Nemotron**, and WebSocket connection state tracking.
+- **Longitudinal Skilling Dashboard**: Analytics dashboard visualization measuring longitudinal competency growth, skill gap deficit tracking, and role-based access control (RBAC).
+- **WebGL Engine Inspector**: Three.js scene graph hierarchy, shader parameter inspection, and frame latency monitoring.
 
-### 2. MNC-Grade Bento Grid & Glassmorphism
-- **Deep Obsidian Canvas (`#05070f`)**:
-  - Rich luxury dark tones with atmospheric chromatic aurora spills.
-- **Interactive Cursor Spotlight (`--mouse-x`, `--mouse-y`)**:
-  - Radial cursor reflections track across every glass card on mousemove (identical to Linear and Vercel).
-- **Magnetic Button Physics**:
-  - Interactive tactile pull towards the cursor with spring recovery.
-- **Dual-Ring Conic Avatar**:
-  - Orbital rings, status indicator with live pulse, and floating 3D tech icons.
-- **Dynamic Typewriter Carousel**:
-  - Smooth typing and deleting cycles with realistic human cadence.
-- **Animated Metrics Counters**:
-  - Eased number incrementing on scroll intersection (`8.4/10` CGPA, `2x` Internships, `2+` Flagships, `3+` Honors).
+### 2. Clean Professional Presentation (Zero Artificial Stickers)
+- Clean, executive avatar frame supporting a real portrait photo (`assets/profile.jpg`) with a refined monogram fallback.
+- Standardized, high-contrast technical skill cards organized by engineering discipline.
+- Clean typographic list markers (`—` and `•`) replacing decorative star/sparkle glyphs.
+- Interactive card spotlight sheen tracking cursor coordinates (`--mouse-x`, `--mouse-y`).
 
-### 3. Integrated ATS Resume Workstation
-- **macOS Window Frame**: Sleek window header with control dots and document metadata.
-- **High-Fidelity Document**: Complete, unabridged ATS-compliant resume sheet.
-- **Recruiter Tools**:
-  - Fullscreen interactive modal viewer.
-  - Clean `@media print` engine formatted for standard A4 paper export.
-  - One-click copy for email and executive summary with animated toast feedback.
+### 3. Procedural 3D WebGL Graphics (`Three.js r128`)
+- Lightweight, 60 FPS iridescent Torus Knot with physical material clearcoat and orbiting dynamic point lights.
+- 1,000+ subtle background particles reacting smoothly to cursor movement.
+
+### 4. Recruiter ATS Resume Station
+- High-fidelity, unabridged curriculum vitae matching standard ATS screening formats.
+- Native browser A4 print engine (`@media print`) allowing instant, clean paper/PDF export.
+- Fullscreen inspection modal with instant copy-to-clipboard actions.
 
 ---
 
 ## 🛠️ Tech Stack
 
 - **3D & WebGL**: Three.js (r128), WebGL, Canvas API
-- **Frontend Architecture**: Semantic HTML5, CSS3 Custom Properties, Modern JavaScript (ES6+)
-- **Typography**: Outfit, Plus Jakarta Sans, JetBrains Mono, Poppins
-- **Icons**: Font Awesome 6 Pro SVGs
+- **Frontend Architecture**: Semantic HTML5, CSS3, Modern JavaScript (ES6+)
+- **Typography**: Inter, Plus Jakarta Sans, JetBrains Mono
+- **Icons**: Font Awesome 6 (for verified platform links: GitHub, LinkedIn, Email, Phone)
 
 ---
 
